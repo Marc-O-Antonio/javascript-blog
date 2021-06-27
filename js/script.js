@@ -327,7 +327,7 @@
 
     /* make new constant named "clickedElement" and give it the value of "this" */
 
-    const clickedElement = this.children[0];
+    const clickedElement = this;
 
     console.log('kliknięto "autora"', this);
 
