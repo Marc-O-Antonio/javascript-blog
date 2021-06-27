@@ -389,7 +389,7 @@
   function addClickListenersToAuthors(){
     /* find all links to authors */
 
-    const authorLinks = document.querySelectorAll(optArticleAuthorSelector);
+    const authorLinks = document.querySelectorAll('a[href^="#author-"]');
 
     /* START LOOP: for each link */
 
