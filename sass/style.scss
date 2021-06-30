@@ -85,6 +85,10 @@ body {
   .active {
     font-weight: bold;
   }
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .list-horizontal {
@@ -105,7 +109,7 @@ body {
 
 .post {
   display: none;
-  
+
   &.active {
     display: block;
   }
@@ -117,8 +121,38 @@ body {
 
 .post-tags {
   display: flex;
-  
+
   p {
     margin: 0 10px 0 0;
   }
+}
+
+
+/* Tag Cloud */
+
+.tags {
+  li {
+    display: inline-block;
+    margin: 0 2px;
+  }
+}
+
+.tag-size-1 {
+  font-size: 12px;
+}
+
+.tag-size-2 {
+  font-size: 18px;
+}
+
+.tag-size-3 {
+  font-size: 24px;
+}
+
+.tag-size-4 {
+  font-size: 30px;
+}
+
+.tag-size-5 {
+  font-size: 36px;
 }
