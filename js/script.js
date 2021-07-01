@@ -241,7 +241,7 @@
     }
 
     /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector('.tags');
+    const tagList = document.querySelector(optTagListSelector);
 
     console.log('stała tagList wyszukuje tagów w prawej kolumni (.tags)');
 
@@ -262,7 +262,7 @@
     for(let tag in allTags){
 
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</li>';
+      const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>';
 
       console.log('tagLinkHTML:', tagLinkHTML);
 
@@ -275,9 +275,6 @@
     /* [NEW] add HTML from allTagsHTML to tagList */
 
     tagList.innerHTML = allTagsHTML;
-
-
-
 
   }
 
@@ -353,7 +350,7 @@
   function addClickListenersToTags(){
   /* find all links to tags */
 
-    const tagLinks = document.querySelectorAll('.post-tags a');
+    const tagLinks = document.querySelectorAll('.post-tags a, .list.tags a ');
 
     /* START LOOP: for each link */
 
