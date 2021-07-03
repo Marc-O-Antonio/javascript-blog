@@ -55,7 +55,11 @@
     optArticleAuthorSelector = '.post-author',
     optTagListSelector = '.tags.list',
     optCloudClassCount = ' 5',
-    optCloudClassPrefix = 'tag-size-'
+    optCloudClassPrefix = 'tag-size-',
+    optAuthorsListSelector = '.authors.list',
+    optAuthorClassCount = '5',
+    optAuthorclassPrefix = 'author-size-';
+
 
 
 
@@ -370,7 +374,53 @@
 
   /* third script */
 
+  function calculateAuthorParams(authors){
+
+    const params = {
+
+      max:0,
+      min:999999
+
+    };
+
+    for(let articleAuthor in authors){
+
+      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' + articleAuthor + ' is used ' + authors[articleAuthor] + ' times');
+
+      if(authors[articleAuthor] > params.max){
+
+        params.max = authors[articleAuthor];
+
+      }
+
+      if(authors[articleAuthor] < params.min){
+
+        params.min = authors[articleAuthor]
+
+      }
+
+    }
+
+    return params;
+  }
+
+  function calculateAuthorClass(count, params){
+
+    const normalizedCount = count - params.min;
+
+    const normalizedMax = params.max - params.min;
+
+    const percentage = normalizedCount / normalizedMax;
+
+    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+
+    return optAuthorClassPrefix+classNumber;
+
+  }
+
   function generateAuthors(){
+
+    let allAuthors= {}
 
     /* find all articles */
 
@@ -402,7 +452,7 @@
 
       /* generate HTML of the link */
 
-      const linkHTML = '<a href="#author-' + articleAuthor + '"<span>' + articleAuthor + '</span></a>';
+      const linkHTML = '<a href="#author-' + articleAuthor + '"<span>' + 'by ' + articleAuthor + '</span></a>';
 
       console.log('stworzone link HTML : ', linkHTML);
 
@@ -412,11 +462,46 @@
 
       console.log('zmiana zawarości string w zmiennej "html"na : ', html);
 
+
+
+         /* [NEW] check if this link is NOT already in allTags */
+         if(!allAuthors[articleAuthor]) {
+          console.log('sprawdź czy link tagu znajduje się w tablicy allTags');
+
+          /* [NEW] add generated code to allTags object */
+          allAuthors[articleAuthor] = 1;
+
+          console.log('jeżeli link tagu nie znajduje się w obiekcie to go dodaj');
+        } else {
+          allAuthors[articleAuthor]++;
+        }
       /* insert HTML of all the links into the authors wrapper */
 
       authorWrapper.innerHTML = html;
+
     /* END LOOP: for every article: */
     }
+
+    const authorList = document.querySelector(optAuthorsListSelector);
+
+    console.log('stała authorList wyszukuje authorów w prawej kolumni (.list.authors)', authorList);
+
+    const authorsParams = calculateAuthorParams(allAuthors);
+    console.log('authorsParams: ', authorsParams);
+
+    let allAuthorsHTML = '';
+
+    for(let articleAuthor in allAuthors){
+
+      const authorLinkHTML = '<li><a class="'/* + calculateTagClass(allAuthors[articleAuthor], authorsParams)*/ + '" href="#author-' + articleAuthor + '">' + articleAuthor + '</a>' + allAuthors[articleAuthor] + ')</li>';
+
+
+      console.log('authorLinkHTML:', authorLinkHTML);
+
+      allAuthorsHTML += authorLinkHTML;
+    }
+
+    authorList.innerHTML = allAuthorsHTML;
 
   }
 
