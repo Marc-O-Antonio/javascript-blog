@@ -493,7 +493,7 @@
 
     for(let articleAuthor in allAuthors){
 
-      const authorLinkHTML = '<li><a class="'/* + calculateTagClass(allAuthors[articleAuthor], authorsParams)*/ + '" href="#author-' + articleAuthor + '">' + articleAuthor + '</a>' + allAuthors[articleAuthor] + ')</li>';
+      const authorLinkHTML = '<li><a class="'/* + calculateTagClass(allAuthors[articleAuthor], authorsParams)*/ + '" href="#author-' + articleAuthor + '">' + articleAuthor + '</a> (' + allAuthors[articleAuthor] + ')</li>';
 
 
       console.log('authorLinkHTML:', authorLinkHTML);
